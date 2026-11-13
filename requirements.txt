@@ -1,0 +1,12 @@
+tensorflow==2.21.0
+numpy>=1.26.0
+scipy
+pandas
+scikit-learn
+scikit-image
+matplotlib
+Pillow
+lime==0.2.0.1
+shap==0.54.1
+opencv-python-headless
+streamlit

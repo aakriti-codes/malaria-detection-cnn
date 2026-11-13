@@ -1,0 +1,36 @@
+# Virtual environment
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Large / regenerable data
+cell_images/
+cache/
+metadata/*.csv
+
+
+# OS / editor
+Thumbs.db
+.DS_Store
+.vscode/
+# Dataset archive
+cell_images.zip
+
+# Duplicate model in project root
+/best_malaria_model.keras
+
+# Unnecessary dataset reports
+outputs/reports/data_split.csv
+outputs/reports/dataset_inventory.csv
+outputs/reports/dataset_report.json
+
+# Duplicate evaluation file
+/evaluation_results.json
+
+# Standalone explanation images
+lime_explanation.png
+shap_explanation.png
