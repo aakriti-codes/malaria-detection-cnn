@@ -68,7 +68,7 @@ def explain_with_lime(predictor, image: np.ndarray,
         batch_size=100,
         segmentation_fn=segment_image,
         random_seed=seed,
-        progress_bar=False,
+     
     )
 
     probs = probe[0]
