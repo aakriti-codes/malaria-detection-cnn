@@ -1,0 +1,16 @@
+{
+  "class_names": [
+    "Uninfected",
+    "Parasitized"
+  ],
+  "label_to_index": {
+    "Uninfected": 0,
+    "Parasitized": 1
+  },
+  "positive_class": "Parasitized",
+  "decision_threshold": 0.5,
+  "image_size": 64,
+  "channels": 3,
+  "color_mode": "RGB",
+  "normalization": "divide_by_255"
+}
