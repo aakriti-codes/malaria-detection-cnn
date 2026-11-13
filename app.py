@@ -133,30 +133,176 @@ def show_prediction(predictor) -> dict:
 # Pages
 # ---------------------------------------------------------------------------
 def page_home():
-    st.title("🔬 AI-Based Malaria Detection")
-    st.subheader("Convolutional Neural Network with LIME and SHAP Explainability")
+    # Custom styling for a polished scientific dashboard
     st.markdown("""
-Malaria is caused by *Plasmodium* parasites that infect red blood cells. A standard diagnosis is
-made by a trained microscopist examining a stained blood smear, which is slow and needs expertise.
-This project trains a **Convolutional Neural Network (CNN)** to classify microscopic images of single
-red blood cells as **Parasitized** or **Uninfected**, and uses **Explainable AI** to show *why* the
-model made each prediction.
+    <style>
+    .hero {
+        background: linear-gradient(120deg, #102B3F, #164B59, #176B68);
+        padding: 38px 35px;
+        border-radius: 18px;
+        margin-bottom: 25px;
+        border: 1px solid #347D7B;
+    }
+    .hero-tag {
+        color: #8DE3D2;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+    }
+    .hero h1 {
+        color: #FFFFFF;
+        font-size: 42px;
+        margin: 15px 0 8px 0;
+    }
+    .hero h3 {
+        color: #A9E9DC;
+        font-size: 21px;
+        font-weight: 500;
+    }
+    .hero p {
+        color: #E1EEEE;
+        font-size: 16px;
+        line-height: 1.7;
+    }
+    .section-card {
+        background: #182630;
+        border: 1px solid #304653;
+        border-radius: 13px;
+        padding: 20px;
+        min-height: 145px;
+        margin-bottom: 12px;
+    }
+    .section-card h4 {
+        color: #8DE3D2;
+        margin-top: 0;
+    }
+    .section-card p {
+        color: #D4E0E6;
+        line-height: 1.6;
+        font-size: 14px;
+    }
+    .workflow {
+        background: #182630;
+        border: 1px solid #304653;
+        border-radius: 12px;
+        padding: 17px 5px;
+        text-align: center;
+        color: #A9E9DC;
+        font-weight: 600;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
-#### Objectives
-1. Inspect and prepare the NIH Malaria Cell Images dataset (27,558 cell images).
-2. Train a CNN that classifies cells as Parasitized or Uninfected.
-3. Evaluate it on an image-level random test split using accuracy, precision, recall, F1, ROC-AUC and a confusion matrix.
-4. Explain individual predictions with **LIME** and **SHAP**.
-5. Provide this interactive application for upload, prediction and explanation.
+    # Hero section
+    st.markdown("""
+    <div class="hero">
+        <div class="hero-tag">AI · COMPUTER VISION · EXPLAINABLE AI</div>
+        <h1>🔬 Malaria Detection</h1>
+        <h3>Intelligent Cell Classification with CNN, LIME &amp; SHAP</h3>
+        <p>
+        An AI-based research prototype that analyses microscopic
+        red blood cell images, classifies them as Parasitized or
+        Uninfected, and provides visual explanations of its predictions.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
 
-#### How the system works
-`Cell image → preprocessing (RGB, 64×64, ÷255) → CNN → P(Parasitized) → prediction`
-`                                      ↘ LIME & SHAP → highlighted image regions`
-""")
-    arch = config.BASE_DIR / "docs" / "architecture_diagram.png"
-    if arch.exists():
-        st.image(str(arch), caption="System architecture", use_column_width=True)
-    st.markdown("Use the sidebar to classify an image, view explanations or see model performance.")
+    # Project statistics
+    st.markdown("### 📌 Project at a glance")
+    c1, c2, c3 = st.columns(3)
+    c1.metric("Dataset size", "27,558", "Cell images")
+    c2.metric("Test accuracy", "96.13%", "Image-level random split")
+    c3.metric("Classification classes", "2", "Parasitized / Uninfected")
+
+    st.divider()
+
+    # Project introduction
+    st.markdown("### 🧬 About the project")
+    st.write(
+        "Malaria is caused by Plasmodium parasites that infect red blood cells. "
+        "This project uses a Convolutional Neural Network (CNN) to identify "
+        "patterns in microscopic cell images and classify them into two "
+        "categories. LIME and SHAP are incorporated to make individual model "
+        "predictions more interpretable."
+    )
+
+    # Project objectives
+    st.markdown("### 🎯 Project objectives")
+    left, right = st.columns(2)
+
+    with left:
+        st.markdown("""
+        <div class="section-card">
+            <h4>01 · Dataset preparation</h4>
+            <p>Inspect, analyse and preprocess the NIH Malaria Cell Images
+            dataset containing 27,558 cell images.</p>
+        </div>
+        <div class="section-card">
+            <h4>02 · CNN development</h4>
+            <p>Train a convolutional neural network to distinguish
+            Parasitized and Uninfected cells.</p>
+        </div>
+        <div class="section-card">
+            <h4>03 · Model evaluation</h4>
+            <p>Evaluate performance using accuracy, precision, recall,
+            F1-score and ROC-AUC.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with right:
+        st.markdown("""
+        <div class="section-card">
+            <h4>04 · LIME explainability</h4>
+            <p>Identify image regions that influence an individual CNN
+            prediction using local explanations.</p>
+        </div>
+        <div class="section-card">
+            <h4>05 · SHAP explainability</h4>
+            <p>Analyse the contribution of image regions to the model's
+            predicted probability.</p>
+        </div>
+        <div class="section-card">
+            <h4>06 · Interactive application</h4>
+            <p>Provide an interface for image uploads, classification,
+            visual explanations and performance analysis.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.divider()
+
+    # Workflow
+    st.markdown("### ⚙️ How the system works")
+    workflow_steps = [
+        ("🖼️", "Cell image"),
+        ("⚙️", "Preprocessing"),
+        ("🧠", "CNN model"),
+        ("🔍", "Prediction"),
+        ("💡", "LIME & SHAP"),
+    ]
+    workflow_columns = st.columns(5)
+
+    for column, (emoji, label) in zip(workflow_columns, workflow_steps):
+        with column:
+            st.markdown(
+                f'<div class="workflow">{emoji}<br>{label}</div>',
+                unsafe_allow_html=True,
+            )
+
+    # Show architecture diagram only if it exists in the repository
+    architecture_path = config.BASE_DIR / "docs" / "architecture_diagram.png"
+    if architecture_path.exists():
+        st.markdown("### 🏗️ System architecture")
+        st.image(str(architecture_path), use_container_width=True)
+
+    st.info(
+        "Use the sidebar to classify a cell image, explore LIME and SHAP "
+        "explanations, and view model performance."
+    )
+    st.caption(
+        "Educational research prototype only · Not intended for medical diagnosis. "
+        "Test metrics use an image-level random split, not a patient-independent evaluation."
+    )
+
 
 
 def page_classify():
@@ -359,7 +505,7 @@ scikit-image · Matplotlib · Streamlit
 A Convolutional Neural Network learns small filters that detect patterns such as edges, stained
 dots and textures. Three convolution blocks (32→64→128 filters, each with batch normalisation, ReLU,
 max-pooling and dropout), followed by global average pooling, a 128-unit dense layer and a sigmoid
-output giving P(Parasitized). About 110,785 parameters, small enough to train on a laptop CPU.
+output giving P(Parasitized). About 110,785 trainable parameters.
 
 ### LIME (Local Interpretable Model-agnostic Explanations)
 Splits the image into superpixels, hides random subsets, records how the CNN's prediction changes,
