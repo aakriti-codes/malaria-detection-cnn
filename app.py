@@ -211,7 +211,7 @@ def page_home():
     st.markdown("### 📌 Project at a glance")
     c1, c2, c3 = st.columns(3)
     c1.metric("Dataset size", "27,558", "Cell images")
-    c2.metric("Test accuracy", "96.13%", "Image-level random split")
+    c2.metric("Test accuracy", "96.43%", "Patient-level split")
     c3.metric("Classification classes", "2", "Parasitized / Uninfected")
 
     st.divider()
